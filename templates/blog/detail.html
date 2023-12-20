@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load comment_tags %}
+{% load ratings %}
+
+{% block content %}
+    <h4>{{blog.title}}</h4>
+    {% ratings blog %}
+    <p>بازدید ها : {{blog.hits.count}}</p>
+    {% if blog.is_special %}
+        {% if user.is_authenticated and user.is_special_user or user == blog.author or user.is_superuser %}
+            <p>{{blog.description|safe}}</p>
+        {% else %}
+            <h6>این مقاله فقط برای کاربران ویژه در دسترس است</h6>  
+        {% endif %}
+    {% else %}
+        <p>{{blog.description|safe}}</p>
+    {% endif %}
+
+    {% render_comments blog request %}
+    {% include_bootstrap %}
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+{% for blog in blogs %}
+    <div class="card  my-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <img width=100% src="{{blog.thumbnail.url}}">
+                </div>
+                <div class="col-8">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <h6 class="card-subtitle text-muted small py-2">{{ blog.publish|naturaltime }}</h6>
+                    <p class="card-text py-2">{{ blog.description|striptags|truncatechars:'150' }}</p>
+                    <a class="btn btn-sm btn-success" href="{% url 'blog:detail_blog' blog.slug %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}

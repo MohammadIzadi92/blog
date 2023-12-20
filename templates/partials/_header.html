@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div id="navbarSupportedContent">
+        <div class="navbar-nav ml-auto">
+            {% for cat in category %}
+                {% if cat.parent == None %}
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" href="{% url 'blog:category' cat.slug %}">
+                            {{cat.title}} 
+                        </a>
+                        {% if cat.children.active %}
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'blog:category' cat.slug %}"> همه </a>
+                            {% include "partials/_header_children.html" %}
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</nav>

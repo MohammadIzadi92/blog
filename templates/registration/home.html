@@ -1,0 +1,82 @@
+{% extends 'registration/base.html' %}
+
+{% block title-meta %}
+{% block title %}
+مقالات
+{% endblock title %}
+{% endblock title-meta %}
+
+{% block main %}
+<div class="row">
+  <div class="col-12">
+    {% if articles %}
+    <div class="card">
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>عنوان</th>
+              <th>نویسنده</th>
+              <th>عکس</th>
+              <th>دسته بندی ها</th>
+              <th>توضیحات</th>
+              <th>تاریخ ثبت</th>
+              <th>ویژه</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for article in articles %}
+            <tr>
+              {% if article.status in "db"|make_list or user.is_superuser %}
+              <td><a href="{% url 'account:article_update' article.pk %}">{{article.title}}</a></td>
+              {% else %}
+              <td>{{article.title}}</td>
+              {% endif %}
+              <td>{{article.author.get_full_name}}</td>
+              <td>{{article.thumbnail_tag}}</td>
+              <td>{{article.category_to_str}}</td>
+              <td>{{article.description|striptags|truncatewords:"3"}}</td>
+              <td>{{article.jpublish}}</td>
+              <td>
+                {% if article.is_special %}
+                <i class="fa fa-check-circle text-green"></i>
+                {% else %}
+                <i class="fa fa-minus-circle text-red"></i>
+                {% endif %}
+              </td>
+              <td>
+                {% if article.status == 'p' %}
+                <span class="btn btn-success btn-sm"> منتشر شده </span> |
+                <a target="_blank" href="{% url 'blog:detail_blog' article.slug %}">
+                  <i class="fas fas fa-eye text-indigo"></i>
+                </a> |
+                {% elif article.status == 'i' %}
+                <span class="btn btn-primary btn-sm"> در حال بررسی </span> |
+                {% elif article.status == 'b' %}
+                <span class="btn btn-warning btn-sm"> برگشت داده شده </span> |
+                {% else %}
+                <span class="btn btn-secondary btn-sm"> پیش نویس </span> |
+                {% endif %}
+
+                {% if user.is_superuser %}
+                <a href="{% url 'account:article_delete' article.pk %}">
+                  <i class="fas fa-trash-alt text-danger"></i>
+                </a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    {% else %}
+    <h5>مقاله ای برای نمایش وجود ندارد</h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock main %}

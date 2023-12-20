@@ -1,0 +1,8 @@
+{% extends "star_ratings/widget_base.html" %}
+{% block rating_detail %}
+
+    {% if not user.is_authenticated %}
+        <div data-toggle="tooltip" data-placement="top" title="برای رای دادن وارد شوید" ></div>
+    {% endif %}
+
+{% endblock %}

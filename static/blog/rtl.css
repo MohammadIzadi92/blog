@@ -1,0 +1,71 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.css');
+
+body{
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: sahel !important;
+}
+.header {
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding-top: 10px;
+    box-shadow: 0 0px 10px 5px rgb(0 0 0 / 10%);
+}
+
+.navbar {
+    height: 50px;
+}
+
+.header-register{
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+.navbar-brand {
+    margin-right: 0;
+}
+
+.form-inline {
+    margin-top: 5px !important;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.form-control {
+    width: 600px !important;
+    border: none !important;
+}
+
+@media (min-width: 1200px){
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1400px !important;
+    }
+}
+
+
+.main{
+    margin-top: 145px;
+    
+}
+
+.sec{
+    box-shadow: 0 0px 10px 5px rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+aside{
+    position: inherit; 
+}
+
+.popular-articles {
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0px 10px 5px rgb(0 0 0 / 10%);
+    margin-bottom: 30px;
+    left: 0;
+    right: auto;
+}
